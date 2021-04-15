@@ -158,6 +158,7 @@ livepixperc=((totalpix-deadpix)/totalpix)*100;
 print(title + "\t" + d2s(deadpixperc,1) + "\t" + d2s(livepixperc,1));
 
 //To make an overlay on an rgb image, the outline of the detected dead cells is shown in white and the outline of the live detected cells is shown in green.
+open(input + File.separator + file);
 if (overlay) {
 	imageCalculator("Subtract create", "Result of Stack-0001","Stack-0002");
 	selectWindow("Result of Result of Stack-0001");
@@ -176,14 +177,15 @@ if (overlay) {
 	selectWindow("rgb");
 	run("Restore Selection");
 	run("Fill", "slice");
+	run("Select None");
 	
 	selectWindow("Stack-0002");
 	run("Outline");
-	selectWindow("Stack-0002");
 	run("Create Selection");
-	setForegroundColor(255, 255, 255);
+	
 	
 	selectWindow("rgb");
+	setForegroundColor(255, 255, 255);
 	run("Restore Selection");
 	run("Fill", "slice");
 	
